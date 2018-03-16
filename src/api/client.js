@@ -18,7 +18,10 @@ export default class ApiClient {
   }
 
   post(path, data = {}) {
-    // FILL IN!
+    return request
+      .post(this.createUrl(path))
+      .set(this.headers())
+      .send(data)
   }
 
   put(path, data = {}) {
