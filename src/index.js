@@ -6,6 +6,9 @@ import store, { history } from './store'
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -14,5 +17,5 @@ ReactDOM.render(
     </Router>
   </Provider>, document.getElementById('root'))
 
-
+injectTapEventPlugin()
 registerServiceWorker();
