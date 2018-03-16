@@ -5,8 +5,6 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import reducers from './reducers'
 const reducer = combineReducers(reducers)
 
-
-
 const devTools = window.devToolsExtension ? window.devToolsExtension() : (f) => f
 
 export const history = createHistory()
@@ -20,10 +18,6 @@ const enhancer = compose(
   applyMiddleware(...middleware),
   devTools
 )
-
-
-
-
 
 const store = createStore(reducer, enhancer)
 
