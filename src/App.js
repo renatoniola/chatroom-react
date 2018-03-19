@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { withRouter,BrowserRouter ,Link } from 'react-router-dom'
 import Routes from './routes/routes.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/theme'
@@ -17,14 +19,23 @@ class App extends Component {
   }
 
   render() {
+    const Logged = (props) => (
+      <div>{ props.email }</div>
+    )
+    const Login = () => (
+      <div>login</div>
+    )
+
     return (
-     
+
 
       <MuiThemeProvider muiTheme={muiTheme}>
       <div>
       <AppBar
           title="Chatroom"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
+
+
+          iconElementRight={!this.props.current_user ? <Login /> : <Logged email={this.props.current_user}/> }
         />
         <Routes />
       </div>
@@ -34,4 +45,12 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = ({ user }) => {
+
+  const current_user = user.email ? user.email : 'guest';
+
+  return {
+     current_user
+  }
+}
+export default withRouter(connect(mapStateToProps)(App))

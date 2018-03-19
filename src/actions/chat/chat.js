@@ -1,35 +1,40 @@
 import API from '../../api/client'
+import { replace,push } from 'react-router-redux'
+
 import {
   APP_LOADING,
   APP_DONE_LOADING,
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-import signIn from './signin'
+//import signIn from './signin'
 
-export const USER_SIGNED_UP = 'USER_SIGNED_UP'
+export const GOT_CHATS = 'GOT_CHATS'
 
 const api = new API()
 
-export default (user) => {
+export default () => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    api.post('users', user)
+    api.get('chatrooms')
       .then((result) => {
 
+        dispatch({ type : GOT_CHATS ,payload: result.body})
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-        
-        api.storeToken(result.body.token);
+
+
 
       })
       .catch((error) => {
+        
         dispatch({ type: APP_DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,
           payload: error.message
         })
+
       })
   }
 }

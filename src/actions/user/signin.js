@@ -1,5 +1,5 @@
 // src/actions/user/sign-in.js
-import { replace } from 'react-router-redux'
+import { replace,push } from 'react-router-redux'
 import API from '../../api/client'
 import {
   APP_LOADING,
@@ -23,17 +23,19 @@ export default ({ email, password}) => {
         dispatch({ type: LOAD_SUCCESS })
 
         const jwt = res.body.token
+        console.log(jwt)
 
         api.storeToken(jwt)
 
         // Redirect programatically to the Lobby
-        dispatch(replace('/'))
+        dispatch(push('/'))
 
         //dispatch(websocket.connect())
 
-        return api.get('/users/me')
+        return api.get('users/me')
       })
       .then((res) => {
+        
         dispatch({
           type: USER_SIGNED_IN,
           payload: res.body

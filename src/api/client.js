@@ -2,7 +2,7 @@ import request from 'superagent'
 
 export default class ApiClient {
   defaultOptions = {
-    tokenStorageKey: 'recipeApiJWT'
+    tokenStorageKey: 'x-auth'
   }
 
   constructor(host, options = {}) {
@@ -11,7 +11,12 @@ export default class ApiClient {
   }
 
 
+  authenticate(email, password) {
+    return this.post('users/login', { email, password })
+  }
+
   get(path) {
+    
     return request
       .get(this.createUrl(path))
       .set(this.headers())
@@ -42,7 +47,7 @@ export default class ApiClient {
     }
 
     if (this.isAuthenticated()) {
-      headers.Authorization = `Bearer ${this.getToken()}`
+      headers['x-auth'] = this.getToken();
     }
 
     return headers
