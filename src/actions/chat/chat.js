@@ -24,11 +24,11 @@ export default () => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
 
-
+        return api.get('users/me')
 
       })
       .catch((error) => {
-        
+
         dispatch({ type: APP_DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,

@@ -35,7 +35,7 @@ export default ({ email, password}) => {
         return api.get('users/me')
       })
       .then((res) => {
-        
+
         dispatch({
           type: USER_SIGNED_IN,
           payload: res.body

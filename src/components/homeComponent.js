@@ -14,19 +14,39 @@ class HomeComponent extends Component {
   render() {
     return (
       <div>
+        {this.props.userArrayFiltered}
         <Link to='/signin'>signin</Link>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ user, chats }) => {
+const mapStateToProps = ({ user, chat }) => {
 
   const current_user = user.email;
+  const current_user_id = user._id;
+
+  let usersArray =[];
+
+  if(chat.chatrooms){
+
+    chat.chatrooms.map(function(item){
+       usersArray.push(item.users[0]);
+       usersArray.push(item.users[1]);
+
+
+    })
+  }
+
+
+  let userArrayFiltered = usersArray.filter( function (item) {
+    return item != current_user_id._id
+  })
 
   return {
      current_user,
-     chats
+     chat,
+     userArrayFiltered
   }
 }
 
