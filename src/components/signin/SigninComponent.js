@@ -67,4 +67,4 @@ const mapStateToProps = () => ({
 })
 
 
-export default withRouter(connect(mapStateToProps, { signin } )(SigninComponent))
+export default connect(mapStateToProps, { signin } )(SigninComponent)

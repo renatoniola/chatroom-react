@@ -1,4 +1,3 @@
-// src/actions/user/sign-in.js
 import { replace,push } from 'react-router-redux'
 import API from '../../api/client'
 import {
@@ -7,40 +6,28 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-//import websocket from '../websocket'
+
 
 export const USER_SIGNED_IN = 'USER_SIGNED_IN'
 
 const api = new API()
 
-export default ({ email, password}) => {
-  return dispatch => {
+export default (user) => {
+  return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    api.authenticate(email, password)
+    api.get('users/me', user)
       .then((res) => {
+
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-
-        const jwt = res.body.token
-        console.log(jwt)
-
-        api.storeToken(jwt)
-
-        // Redirect programatically to the Lobby
-
-
-        //dispatch(websocket.connect())
-
-        return api.get('users/me')
-      })
-      .then((res) => {
 
         dispatch({
           type: USER_SIGNED_IN,
           payload: res.body
         })
-        dispatch(push('/'))
+
+
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })
@@ -48,6 +35,7 @@ export default ({ email, password}) => {
           type: LOAD_ERROR,
           payload: error.message
         })
+        dispatch(replace('/signin'))
       })
   }
 }

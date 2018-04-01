@@ -1,0 +1,13 @@
+.user-panel {
+  box-sizing: border-box;
+  background-color: #e6e6e6;
+  border-right: 1px solid #cfcfcf ocker;
+  color: #3d3d3d;
+  width: 150px;
+  height: 100%; }
+
+.list-user-panel-item {
+  width: 150px;
+  padding: 12px 0px 12px 0px;
+  border-bottom: 1px solid white;
+  text-align: center; }
