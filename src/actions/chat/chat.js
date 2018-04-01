@@ -1,5 +1,5 @@
 import API from '../../api/client'
-import { replace,push } from 'react-router-redux'
+import { replace, push } from 'react-router-redux'
 
 import {
   APP_LOADING,
@@ -16,7 +16,7 @@ const api = new API()
 export default () => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
-
+    console.log('called')
     api.get('chatrooms')
       .then((result) => {
 
