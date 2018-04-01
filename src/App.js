@@ -5,6 +5,7 @@ import { withRouter,BrowserRouter ,Link } from 'react-router-dom'
 import Routes from './routes/routes.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/theme'
+import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import './App.css';
 
@@ -20,10 +21,10 @@ class App extends Component {
 
   render() {
     const Logged = (props) => (
-      <div>{ props.email }</div>
+      <div>{ props.email }<FlatButton>logout</FlatButton></div>
     )
     const Login = () => (
-      <div>login</div>
+      <div><FlatButton>login</FlatButton></div>
     )
 
     return (
